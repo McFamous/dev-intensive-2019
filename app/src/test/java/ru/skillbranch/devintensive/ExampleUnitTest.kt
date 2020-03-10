@@ -141,4 +141,14 @@ class ExampleUnitTest {
         println(TimeUnits.DAY.plural(222))
 
     }
+    @Test
+    fun test_bender(){
+        var benderObj : Bender = Bender(Bender.Status.NORMAL,Bender.Question.SERIAL)
+        println(benderObj.listenAnswer("Роберт"))
+        println(benderObj.listenAnswer("Роберт758765"))
+        println(benderObj.listenAnswer("6757656"))
+        println(benderObj.listenAnswer("888888888"))
+        println(benderObj.listenAnswer("0000ерт"))
+
+    }
 }

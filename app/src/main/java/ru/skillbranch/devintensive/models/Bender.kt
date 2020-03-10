@@ -1,5 +1,6 @@
 package ru.skillbranch.devintensive.models
 
+import java.lang.NumberFormatException
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -23,31 +24,33 @@ class Bender(
             question = question.nextQuestion()
             "Отлично - ты справился\n${question.question}" to status.color
         }
-//        else if(testOnLowerCase(answer) &&  question == Question.NAME){
-//            "${question.correctEnter()}\n${question.question}" to status.color
-//        }
-//        else if(!testOnLowerCase(answer) &&  question == Question.PROFESSION){//
-//            "${question.correctEnter()}\n${question.question}" to status.color
-//        }
-//        else if(!matcher.find() && question == Question.MATERIAL ){//
-//            "${question.correctEnter()}\n${question.question}" to status.color
-//        }
-//        else if(matcher.find() && question == Question.BDAY ){
-//            "${question.correctEnter()}\n${question.question}" to status.color
-//        }
-//        else if(matcher.find() && question == Question.MATERIAL || answer.length != 7 ){
-//            "${question.correctEnter()}\n${question.question}" to status.color
-//        }
-//        else if(question == Question.IDLE)
-//            "${question.correctEnter()}\n${question.question}" to status.color
         else{
-            status = status.nextStatus()
-            if(status == Status.NORMAL && question != Question.IDLE){
-                question = Question.NAME
-                "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
+            if(testOnLowerCase(answer) &&  question == Question.NAME){
+                "${question.correctEnter()}\n${question.question}" to status.color
             }
-            else
-                "Это неправильный ответ\n${question.question}" to status.color
+            else if(!testOnLowerCase(answer) &&  question == Question.PROFESSION){//
+                "${question.correctEnter()}\n${question.question}" to status.color
+            }
+            else if(matcher.find() && question == Question.MATERIAL ){//
+                "${question.correctEnter()}\n${question.question}" to status.color
+            }
+            else if(!checkLetters(answer) && question == Question.BDAY ){
+                "${question.correctEnter()}\n${question.question}" to status.color
+            }
+            else if((!checkLetters(answer) || answer.length != 7) && question == Question.SERIAL ){
+                "${question.correctEnter()}\n${question.question}" to status.color
+            }
+            else if(question == Question.IDLE)
+                "${question.correctEnter()}\n${question.question}" to status.color
+            else{
+                status = status.nextStatus()
+                if(status == Status.NORMAL && question != Question.IDLE){
+                    question = Question.NAME
+                    "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
+                }
+                else
+                    "Это неправильный ответ\n${question.question}" to status.color
+            }
         }
     }
 
@@ -95,12 +98,21 @@ class Bender(
         abstract fun nextQuestion() : Question
         abstract fun correctEnter() : String
     }
-    private fun isDigit(str : String) : Boolean{
-        return str.toIntOrNull() != null
-    }
 
-    fun testOnLowerCase(str : String) : Boolean{
-        val lowerStr = str.toLowerCase()
-        return str == lowerStr
+    private fun testOnLowerCase(str : String) : Boolean{
+        val lowerStr = str.toCharArray()
+        return lowerStr[0] == lowerStr[0].toLowerCase()
+    }
+    private fun checkLetters(str : String) : Boolean{
+//        val pattern : Pattern = Pattern.compile("/^d+$/")
+//        val matcher : Matcher = pattern.matcher(str)
+//        return matcher.find()
+        return try{
+            str.toInt()
+            true
+        }
+        catch ( e : NumberFormatException){
+            false
+        }
     }
 }
