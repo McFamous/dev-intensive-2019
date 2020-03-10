@@ -23,28 +23,30 @@ class Bender(
             question = question.nextQuestion()
             "Отлично - ты справился\n${question.question}" to status.color
         }
-        else if(testOnLowerCase(answer) &&  question == Question.NAME){
-            "${question.correctEnter()}\n${question.question}" to status.color
-        }
-        else if(!testOnLowerCase(answer) &&  question == Question.PROFESSION){//
-            "${question.correctEnter()}\n${question.question}" to status.color
-        }
-        else if(!matcher.find() && question == Question.MATERIAL ){//
-            "${question.correctEnter()}\n${question.question}" to status.color
-        }
-        else if(matcher.find() && question == Question.BDAY ){
-            "${question.correctEnter()}\n${question.question}" to status.color
-        }
-        else if(matcher.find() && question == Question.MATERIAL || answer.length != 7 ){
-            "${question.correctEnter()}\n${question.question}" to status.color
-        }
+//        else if(testOnLowerCase(answer) &&  question == Question.NAME){
+//            "${question.correctEnter()}\n${question.question}" to status.color
+//        }
+//        else if(!testOnLowerCase(answer) &&  question == Question.PROFESSION){//
+//            "${question.correctEnter()}\n${question.question}" to status.color
+//        }
+//        else if(!matcher.find() && question == Question.MATERIAL ){//
+//            "${question.correctEnter()}\n${question.question}" to status.color
+//        }
+//        else if(matcher.find() && question == Question.BDAY ){
+//            "${question.correctEnter()}\n${question.question}" to status.color
+//        }
+//        else if(matcher.find() && question == Question.MATERIAL || answer.length != 7 ){
+//            "${question.correctEnter()}\n${question.question}" to status.color
+//        }
+//        else if(question == Question.IDLE)
+//            "${question.correctEnter()}\n${question.question}" to status.color
         else{
             status = status.nextStatus()
-            if(status == Status.NORMAL && question != Question.IDLE){
-                question = Question.NAME
-                "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
-            }
-            else
+//            if(status == Status.NORMAL && question != Question.IDLE){
+//                question = Question.NAME
+//                "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
+//            }
+//            else
                 "Это неправильный ответ\n${question.question}" to status.color
         }
     }
