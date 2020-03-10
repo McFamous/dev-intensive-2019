@@ -42,11 +42,11 @@ class Bender(
 //            "${question.correctEnter()}\n${question.question}" to status.color
         else{
             status = status.nextStatus()
-//            if(status == Status.NORMAL && question != Question.IDLE){
-//                question = Question.NAME
-//                "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
-//            }
-//            else
+            if(status == Status.NORMAL && question != Question.IDLE){
+                question = Question.NAME
+                "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
+            }
+            else
                 "Это неправильный ответ\n${question.question}" to status.color
         }
     }
