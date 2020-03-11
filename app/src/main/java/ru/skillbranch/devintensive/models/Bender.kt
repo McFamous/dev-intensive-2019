@@ -24,7 +24,7 @@ class Bender(
             question = question.nextQuestion()
             "Отлично - ты справился\n${question.question}" to status.color
         }
-        else{
+        else{//
             if(testOnLowerCase(answer) &&  question == Question.NAME){
                 "${question.correctEnter()}\n${question.question}" to status.color
             }
