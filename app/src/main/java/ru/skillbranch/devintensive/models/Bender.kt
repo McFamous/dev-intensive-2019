@@ -70,7 +70,7 @@ class Bender(
     }
     enum class Question(val question:String, val answers:List<String>){
 
-        NAME("Как меня зовут?", listOf("Бендер","bender")) {
+        NAME("Как меня зовут?", listOf("Бендер","Bender")) {
             override fun nextQuestion(): Question = PROFESSION
             override fun correctEnter(): String = "Имя должно начинаться с заглавной буквы"
         },

@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEdito
         textTxt.text = benderObj.askQuestion()
 
 
-        textTxt.viewTreeObserver.addOnGlobalLayoutListener(OnGlobalLayoutListener { isKeyboardOpen(textTxt.rootView)  })
+        textTxt.viewTreeObserver.addOnGlobalLayoutListener(OnGlobalLayoutListener { isKeyboardOpen() })
     }
 
     override fun onRestart() {

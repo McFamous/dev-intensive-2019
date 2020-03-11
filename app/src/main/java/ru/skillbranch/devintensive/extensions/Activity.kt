@@ -14,16 +14,17 @@ fun Activity.hideKeyboard(){
     val imm : InputMethodManager = applicationContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
 }
-fun Activity.isKeyboardOpen(rootView : View) : Boolean{
+fun Activity.isKeyboardOpen() : Boolean{
 
     /* 128dp = 32dp * 4, minimum button height 32dp and generic 4 rows soft keyboard */
     val SOFT_KEYBOARD_HEIGHT_DP_THRESHOLD = 128
+    val ll = window.decorView.rootView
     val r = Rect()
-    rootView.getWindowVisibleDisplayFrame(r)
-    val dm: DisplayMetrics = rootView.resources.displayMetrics
+    ll.getWindowVisibleDisplayFrame(r)
+    val dm: DisplayMetrics = ll.resources.displayMetrics
     /* heightDiff = rootView height - status bar height (r.top) - visible frame height (r.bottom - r.top) */
     /* heightDiff = rootView height - status bar height (r.top) - visible frame height (r.bottom - r.top) */
-    val heightDiff: Int = rootView.bottom - r.bottom
+    val heightDiff: Int = ll.bottom - r.bottom
     /* Threshold size: dp to pixels, multiply with display density */
     /* Threshold size: dp to pixels, multiply with display density */
     val isKeyboardShown: Boolean = heightDiff > SOFT_KEYBOARD_HEIGHT_DP_THRESHOLD * dm.density
