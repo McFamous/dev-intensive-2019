@@ -104,9 +104,6 @@ class Bender(
         return lowerStr[0] == lowerStr[0].toLowerCase()
     }
     private fun checkLetters(str : String) : Boolean{
-//        val pattern : Pattern = Pattern.compile("/^d+$/")
-//        val matcher : Matcher = pattern.matcher(str)
-//        return matcher.find()
         return try{
             str.toInt()
             true
