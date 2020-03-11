@@ -11,6 +11,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.skillbranch.devintensive.extensions.hideKeyboard
@@ -36,6 +37,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEdito
         benderImage = iv_bender
         textTxt = tv_text
         messageEt = et_message
+//        messageEt.imeOptions = EditorInfo.IME_ACTION_DONE
+        messageEt.setOnEditorActionListener(this)
         sendBtn = iv_send
         sendBtn.setOnClickListener(this)
 
@@ -50,7 +53,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEdito
 
 
         textTxt.text = benderObj.askQuestion()
-        messageEt.setOnEditorActionListener(this)
+
 
         textTxt.viewTreeObserver.addOnGlobalLayoutListener(OnGlobalLayoutListener { isKeyboardOpen(textTxt.rootView)  })
     }
@@ -105,7 +108,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEdito
     }
 
     override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
-        return if(actionId == EditorInfo.IME_ACTION_DONE){
+        return if(actionId == EditorInfo.IME_ACTION_DONE && messageEt.text.toString() != ""){
             val (phrase, color) = benderObj.listenAnswer(messageEt.text.toString())
             messageEt.setText("")
             val (r,g,b) = color

@@ -7,6 +7,7 @@ import android.util.DisplayMetrics
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.LinearLayout
 
 
 fun Activity.hideKeyboard(){
@@ -16,8 +17,7 @@ fun Activity.hideKeyboard(){
 fun Activity.isKeyboardOpen(rootView : View) : Boolean{
 
     /* 128dp = 32dp * 4, minimum button height 32dp and generic 4 rows soft keyboard */
-    val SOFT_KEYBOARD_HEIGHT_DP_THRESHOLD = 128;
-
+    val SOFT_KEYBOARD_HEIGHT_DP_THRESHOLD = 128
     val r = Rect()
     rootView.getWindowVisibleDisplayFrame(r)
     val dm: DisplayMetrics = rootView.resources.displayMetrics
