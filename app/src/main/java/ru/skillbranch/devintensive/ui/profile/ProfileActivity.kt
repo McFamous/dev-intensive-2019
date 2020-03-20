@@ -14,6 +14,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_profile.*
@@ -22,6 +23,7 @@ import ru.skillbranch.devintensive.extensions.hideKeyboard
 import ru.skillbranch.devintensive.extensions.isKeyboardOpen
 import ru.skillbranch.devintensive.models.Bender
 import ru.skillbranch.devintensive.models.Profile
+import ru.skillbranch.devintensive.ui.custom.CircleImageView
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
 
 
@@ -83,6 +85,8 @@ class ProfileActivity : AppCompatActivity() {
         )
 
         isEditMode = savedInstanceState?.getBoolean(IS_EDIT_MODE, false) ?: false
+        showCurrentMode(isEditMode)
+
         btn_edit.setOnClickListener {
             if(isEditMode) saveProfileInfo()
             isEditMode = !isEditMode
@@ -108,10 +112,18 @@ class ProfileActivity : AppCompatActivity() {
 
         with(btn_edit){
             val filter : ColorFilter? = if(isEdit){
-                PorterDuffColorFilter(
-                    resources.getColor(R.color.color_accent, theme),
-                    PorterDuff.Mode.SRC_IN
-                )
+                if(viewModel.getTheme().value == AppCompatDelegate.MODE_NIGHT_YES){
+                    PorterDuffColorFilter(
+                        resources.getColor(R.color.color_accent_night, theme),
+                        PorterDuff.Mode.SRC_IN
+                    )
+                }
+                else{
+                    PorterDuffColorFilter(
+                        resources.getColor(R.color.color_accent, theme),
+                        PorterDuff.Mode.SRC_IN
+                    )
+                }
             }
             else
                 null

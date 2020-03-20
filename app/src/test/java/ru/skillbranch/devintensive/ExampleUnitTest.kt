@@ -150,5 +150,6 @@ class ExampleUnitTest {
         println(benderObj.listenAnswer("888888888"))
         println(benderObj.listenAnswer("0000ерт"))
 
+        println(Profile(3,4,"Женя","Стереотипов","lol","hhtpp").nickName())
     }
 }
