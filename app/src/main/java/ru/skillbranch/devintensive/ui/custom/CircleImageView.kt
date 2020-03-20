@@ -13,19 +13,19 @@ class CircleImageView @JvmOverloads constructor(
     defStyleAttr : Int = 0
 ): androidx.appcompat.widget.AppCompatImageView(context, attrs, defStyleAttr) {
 
-    @Dimension
-    fun getBorderWidth() : Int = resources.getDimension(R.dimen.cv_borderWidth).toInt()
-
-    fun setBorderWidth(@Dimension dp : Int){
-    }
-
-    fun getBorderColor() : Int = R.color.cv_borderColor
-
-    fun setBorderColor(hex : String){
-
-    }
-
-    fun setBorderColor(@ColorRes colorId : Int){
-
-    }
+//    @Dimension
+//    fun getBorderWidth() : Int = resources.getDimension(R.dimen.cv_borderWidth).toInt()
+//
+//    fun setBorderWidth(@Dimension dp : Int){
+//    }
+//
+//    fun getBorderColor() : Int = R.color.cv_borderColor
+//
+//    fun setBorderColor(hex : String){
+//
+//    }
+//
+//    fun setBorderColor(@ColorRes colorId : Int){
+//
+//    }
 }
