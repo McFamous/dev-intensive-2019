@@ -10,8 +10,8 @@ data class Profile(
     val about : String,
     val repository : String
 ) {
-    private val nickName : String = "John Doe" //TODO implement me
-    private val rank : String = "Junior Android Developer"
+    val nickName : String = nickName()
+    val rank : String = "Junior Android Developer"
     fun toMap() : Map<String, Any> = mapOf(
         "nickName" to nickName,
         "rank" to rank,
