@@ -201,17 +201,18 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun saveProfileInfo(){
-        if(!valid){
+        if(!valid)
             et_repository.text = null // try
-        Profile(
+        val profile = Profile(
             firstName = et_first_name.text.toString(),
             lastName = et_last_name.text.toString(),
             about = et_about.text.toString(),
             repository = et_repository.text.toString()
-        ).apply {
+        )
+        profile.apply {
             viewModel.saveProfileData(this)
         }
-    }
+        tv_nick_name.text = profile.nickName
 
 }
 }

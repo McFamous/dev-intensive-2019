@@ -9,8 +9,9 @@ data class Profile(
     val lastName : String,
     val about : String,
     val repository : String
+//    val nickName : String = Utils.transliteration("$firstName $lastName","_")
 ) {
-    val nickName : String = nickName()
+    val nickName = Utils.transliteration("$firstName $lastName","_")
     val rank : String = "Junior Android Developer"
     fun toMap() : Map<String, Any> = mapOf(
         "nickName" to nickName,

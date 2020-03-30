@@ -15,6 +15,7 @@ object PreferencesRepository {
     private const val ABOUT = "ABOUT"
     private const val REPOSITORY = "REPOSITORY"
     private const val APP_THEME = "APP_THEME"
+//    private const val NICK_NAME = "NICK_NAME"
 
 
     private val prefs : SharedPreferences by lazy {
@@ -30,6 +31,7 @@ object PreferencesRepository {
             putValue(LAST_NAME to lastName)
             putValue(ABOUT to about)
             putValue(REPOSITORY to repository)
+//            putValue(NICK_NAME to nickName)
         }
     }
 
@@ -40,6 +42,7 @@ object PreferencesRepository {
         prefs.getString(LAST_NAME, "")!!,
         prefs.getString(ABOUT, "")!!,
         prefs.getString(REPOSITORY, "")!!
+//        prefs.getString(NICK_NAME, "")!!
     )
 
     private fun putValue(pair : Pair<String, Any>) = with(prefs.edit()){
