@@ -150,7 +150,7 @@ class ProfileActivity : AppCompatActivity() {
                     }
                 }
                 if(!valid)
-                    wr_repository.error = "Невалидный адрес репозитория"
+                    wr_repository.error = R.string.textinput_error.toString()
                 else
                     wr_repository.error = ""
             }
