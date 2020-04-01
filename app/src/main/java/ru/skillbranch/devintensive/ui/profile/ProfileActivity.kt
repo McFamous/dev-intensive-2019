@@ -110,50 +110,51 @@ class ProfileActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
-                if(s.toString() == "")
+                if (s.toString() == "")
                     valid = true
-                else{
+                else {
                     var slash = 0
-                    for(i in 1..s.toString().length){
-                        if(s.toString()[i - 1] == '/')
+                    for (i in 1..s.toString().length) {
+                        if (s.toString()[i - 1] == '/')
                             slash++
                     }
-                    if(s.toString().contains("https://")){
-                        valid = when {
-                            s.toString().contains("https://github.com/") && slash == 3 -> true
-                            s.toString().contains("https://www.github.com/") && slash == 3 -> true
-                            else -> false
-                        }
+                    valid = if (s.toString()[0] == 'h' && s.toString().contains("https://"))
+                        s.toString().contains("https://github.com/")
+                                || s.toString().contains("https://www.github.com/")
+                    else if (s.toString()[0] == 'w' && s.toString().contains("www"))
+                        s.toString().contains("www.github.com/")
+                    else
+                        s.toString()[0] == 'g' && s.toString().contains("github.com/")
 
-                    }
-                    else if(s.toString()[0] == 'w' && s.toString().contains("www") && slash == 1){
-                        if(s.toString().contains("www.github.com/"))
-                            valid = true
-                    }
-                    else valid = s.toString()[0] == 'g' && s.toString().contains("github.com/") && slash == 1
 
-                    if(valid){
-                        valid = s.toString()[s.toString().length - 1] != '/'
-                        valid = !s.toString().endsWith("enterprise")
-                        valid = !s.toString().endsWith("features")
-                        valid = !s.toString().endsWith("topics")
-                        valid = !s.toString().endsWith("collections")
-                        valid = !s.toString().endsWith("trending")
-                        valid = !s.toString().endsWith("events")
-                        valid = !s.toString().endsWith("marketplace")
-                        valid = !s.toString().endsWith("pricing")
-                        valid = !s.toString().endsWith("nonprofit")
-                        valid = !s.toString().endsWith("customer-stories")
-                        valid = !s.toString().endsWith("security")
-                        valid = !s.toString().endsWith("login")
-                        valid = !s.toString().endsWith("join")
-                    }
+                    if (valid)
+                        valid = !(s.toString()[s.toString().length - 1] == '/'
+                                || s.toString().endsWith("enterprise")
+                                || s.toString().endsWith("features")
+                                || s.toString().endsWith("topics")
+                                || s.toString().endsWith("collections")
+                                || s.toString().endsWith("trending")
+                                || s.toString().endsWith("events")
+                                || s.toString().endsWith("marketplace")
+                                || s.toString().endsWith("pricing")
+                                || s.toString().endsWith("nonprofit")
+                                || s.toString().endsWith("customer-stories")
+                                || s.toString().endsWith("security")
+                                || s.toString().endsWith("login")
+                                || s.toString().endsWith("join"))
+                    if (valid)
+                        valid = (s.toString().contains("https://github.com/") && slash == 3
+                                || s.toString().contains("https://www.github.com/") && slash == 3
+                                || s.toString()[0] == 'w' && s.toString().contains("www") && slash == 1
+                                || s.toString()[0] == 'g' && s.toString().contains("github.com/") && slash == 1)
+
                 }
-                if(!valid)
-                    wr_repository.error = R.string.textinput_error.toString()
+                if (!valid)
+                    wr_repository.error = "Невалидный адрес репозитория"
                 else
                     wr_repository.error = ""
             }
+
         })
     }
 
